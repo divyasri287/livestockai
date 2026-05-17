@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Live Camera | LivestockAI{% endblock %}
+{% block content %}
+<section class="page-header fade-up">
+    <div>
+        <span class="eyebrow">Live Detection</span>
+        <h2>Use your webcam for instant breed analysis.</h2>
+    </div>
+    <div class="header-actions">
+        <a href="{{ url_for('detect') }}" class="button ghost"><i class="fa-solid fa-upload"></i> Upload Image</a>
+    </div>
+</section>
+
+<div class="grid-two fade-up">
+    <div class="glass-card camera-panel">
+        <div class="camera-frame">
+            <video id="cameraStream" autoplay muted playsinline></video>
+            <div class="camera-overlay">
+                <p>Live camera view</p>
+            </div>
+        </div>
+        <div class="button-row">
+            <button id="captureButton" class="button primary"><i class="fa-solid fa-camera"></i> Capture</button>
+            <button id="clearCamera" class="button ghost"><i class="fa-solid fa-ban"></i> Reset</button>
+        </div>
+    </div>
+    <div class="glass-card camera-result-panel">
+        <h3>Live result preview</h3>
+        <div class="preview-panel camera-preview">
+            <img id="cameraPreview" alt="Camera preview" />
+            <p class="preview-text">Capture an image to preview the detection result.</p>
+        </div>
+        <div class="result-card" id="cameraResultSection">
+            <div class="result-empty">
+                <i class="fa-solid fa-wave-square"></i>
+                <p>Captured predictions appear here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

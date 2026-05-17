@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}History | LivestockAI{% endblock %}
+{% block content %}
+<section class="page-header fade-up">
+    <div>
+        <span class="eyebrow">Prediction History</span>
+        <h2>Review past breed detections and filter your results.</h2>
+    </div>
+    <div class="header-actions history-tools">
+        <input id="searchInput" type="text" placeholder="Search breed or origin" />
+        <select id="filterSelect">
+            <option value="all">All Sources</option>
+            <option value="Upload">Upload</option>
+            <option value="Camera">Camera</option>
+        </select>
+    </div>
+</section>
+
+<div class="glass-card history-card fade-up">
+    <div class="table-wrap">
+        <table class="history-table" id="historyTable">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Breed</th>
+                    <th>Confidence</th>
+                    <th>Category</th>
+                    <th>Origin</th>
+                    <th>Type</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.timestamp }}</td>
+                    <td>{{ record.breed }}</td>
+                    <td>{{ record.confidence }}%</td>
+                    <td>{{ record.category }}</td>
+                    <td>{{ record.origin }}</td>
+                    <td>{{ record.animal_type }}</td>
+                    <td>{{ record.source }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="7" class="empty-row">No history available yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

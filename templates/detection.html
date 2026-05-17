@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Breed Detection | LivestockAI{% endblock %}
+{% block content %}
+<section class="page-header fade-up">
+    <div>
+        <span class="eyebrow">Detection Studio</span>
+        <h2>Upload your image and analyze the breed with the AI engine.</h2>
+    </div>
+    <div class="header-actions">
+        <a href="{{ url_for('camera') }}" class="button ghost"><i class="fa-solid fa-video"></i> Use Live Camera</a>
+    </div>
+</section>
+
+<div class="grid-two fade-up">
+    <div class="glass-card upload-card">
+        <div class="upload-header">
+            <div>
+                <h3>Image Upload</h3>
+                <p>Drag & drop or browse an image for breed detection.</p>
+            </div>
+            <span class="badge">AI Scan</span>
+        </div>
+        <div class="drop-zone" id="dropZone">
+            <div>
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <h3>Drop your image or click to upload</h3>
+                <p>Use a clear cattle or buffalo photo for the best breed prediction.</p>
+                <small>JPG, PNG, JPEG supported • Max size 10MB</small>
+            </div>
+            <input id="imageInput" type="file" accept="image/*" hidden />
+        </div>
+        <div class="preview-card glass-card">
+            <p class="preview-label">Preview</p>
+            <div class="preview-panel">
+                <img id="previewImage" class="preview-image" alt="Preview" />
+                <p class="preview-text">No image selected yet.</p>
+            </div>
+        </div>
+        <div class="button-row">
+            <button id="predictButton" class="button primary" disabled><i class="fa-solid fa-magnifying-glass"></i> Predict Breed</button>
+            <button id="resetButton" class="button ghost"><i class="fa-solid fa-rotate"></i> Reset</button>
+        </div>
+    </div>
+    <div class="glass-card info-panel">
+        <div class="info-heading">
+            <h3>Prediction Preview</h3>
+            <p>This panel shows the latest result and confidence score before you navigate to the result page.</p>
+        </div>
+        <div class="result-card" id="resultSection">
+            <div class="result-empty">
+                <i class="fa-solid fa-chart-simple"></i>
+                <p>Start a prediction to see the AI result summary here.</p>
+            </div>
+        </div>
+        <div class="confidence-card glass-card">
+            <div class="progress-text">
+                <span>Confidence</span>
+                <strong id="confidenceValue">0%</strong>
+            </div>
+            <div class="confidence-bar"><div id="confidenceBarFill"></div></div>
+            <div class="confidence-meta">
+                <div><strong>Category</strong><span id="breedCategory">-</span></div>
+                <div><strong>Origin</strong><span id="breedOrigin">-</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

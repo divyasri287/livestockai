@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | LivestockAI{% endblock %}
+{% block content %}
+<section class="page-header fade-up">
+    <div>
+        <span class="eyebrow">Analytics Dashboard</span>
+        <h2>Interactive breed statistics and system performance metrics.</h2>
+    </div>
+    <div class="header-actions">
+        <a href="{{ url_for('history') }}" class="button ghost"><i class="fa-solid fa-clock-rotate-left"></i> View History</a>
+    </div>
+</section>
+
+<div class="metric-grid fade-up">
+    <article class="stat-card glass-card">
+        <p>Total Detections</p>
+        <h2>{{ stats.total_predictions }}</h2>
+    </article>
+    <article class="stat-card glass-card">
+        <p>Average Confidence</p>
+        <h2>{{ stats.average_confidence }}</h2>
+    </article>
+    <article class="stat-card glass-card">
+        <p>Distinct Breeds</p>
+        <h2>{{ stats.breed_count }}</h2>
+    </article>
+    <article class="stat-card glass-card">
+        <p>Active Users</p>
+        <h2>{{ stats.user_count }}</h2>
+    </article>
+</div>
+
+<div class="chart-grid fade-up">
+    <div class="chart-card glass-card">
+        <div class="chart-title">Breed Distribution</div>
+        <canvas id="breedChart" data-labels='{{ stats.breed_labels | tojson }}' data-values='{{ stats.breed_values | tojson }}'></canvas>
+    </div>
+    <div class="chart-card glass-card">
+        <div class="chart-title">Predictions by Source</div>
+        <canvas id="sourceChart" data-labels='{{ stats.source_labels | tojson }}' data-values='{{ stats.source_values | tojson }}'></canvas>
+    </div>
+</div>
+
+<div class="detail-grid fade-up">
+    <div class="glass-card insight-card">
+        <h3>Top Breed</h3>
+        <p>{{ stats.top_breed or 'N/A' }}</p>
+    </div>
+    <div class="glass-card insight-card">
+        <h3>Top Category</h3>
+        <p>{{ stats.top_category or 'N/A' }}</p>
+    </div>
+    <div class="glass-card insight-card">
+        <h3>Most Active Source</h3>
+        <p>{{ stats.top_source or 'N/A' }}</p>
+    </div>
+</div>
+{% endblock %}

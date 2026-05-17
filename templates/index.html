@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}Home | LivestockAI{% endblock %}
+{% block content %}
+<section class="hero-panel">
+    <div class="hero-copy fade-up">
+        <span class="eyebrow">AI Livestock Intelligence</span>
+        <h1>Fast, premium breed detection for cattle and buffalo.</h1>
+        <p>Upload an image, get a smart prediction, and track results in a clean dashboard.</p>
+        <div class="hero-cta">
+            <a href="{{ url_for('detect') }}" class="button primary">Start Detection</a>
+            <a href="{{ url_for('dashboard') }}" class="button secondary">Analytics</a>
+        </div>
+    </div>
+    <div class="hero-aside fade-up delay-sm">
+        <div class="promo-card glass-card">
+            <div class="card-heading"><i class="fa-solid fa-microchip"></i> AI Engine</div>
+            <p>Smart inference for cattle and buffalo breed detection.</p>
+            <div class="promo-metrics">
+                <div><span>6</span><p>Breeds</p></div>
+                <div><span>99%+</span><p>Accuracy</p></div>
+                <div><span>Live</span><p>Camera</p></div>
+            </div>
+        </div>
+        <div class="stats-grid fade-up delay-md">
+            <article class="stat-card glass-card">
+                <p class="stat-label">Predictions</p>
+                <h2>{{ stats.total_predictions if stats else 0 }}</h2>
+            </article>
+            <article class="stat-card glass-card">
+                <p class="stat-label">Confidence</p>
+                <h2>{{ stats.average_confidence if stats else '0%' }}</h2>
+            </article>
+            <article class="stat-card glass-card">
+                <p class="stat-label">Users</p>
+                <h2>{{ stats.user_count if stats else 0 }}</h2>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="quick-access fade-up">
+    <div class="section-title">
+        <span class="eyebrow">Quick Actions</span>
+        <h3>Jump directly to the most important tools.</h3>
+    </div>
+    <div class="feature-cards">
+        <article class="feature-card glass-card">
+            <i class="fa-solid fa-bullseye"></i>
+            <h3>Detect Breed</h3>
+            <p>Upload any cattle or buffalo image and get instant breed analysis.</p>
+            <a href="{{ url_for('detect') }}" class="button primary">Start Detection</a>
+        </article>
+        <article class="feature-card glass-card">
+            <i class="fa-solid fa-video"></i>
+            <h3>Live Camera</h3>
+            <p>Use your webcam to capture live breed detection sessions.</p>
+            <a href="{{ url_for('camera') }}" class="button secondary">Go Live</a>
+        </article>
+        <article class="feature-card glass-card">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <h3>History</h3>
+            <p>Review previous detections and track prediction trends.</p>
+            <a href="{{ url_for('history') }}" class="button secondary">View History</a>
+        </article>
+        <article class="feature-card glass-card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Analytics</h3>
+            <p>Monitor breed counts, confidence scores, and system performance.</p>
+            <a href="{{ url_for('dashboard') }}" class="button secondary">Open Dashboard</a>
+        </article>
+    </div>
+</section>
+
+<section class="what-new fade-up">
+    <div class="section-title">
+        <span class="eyebrow">Recent Predictions</span>
+        <h3>Latest brand detections in one view.</h3>
+    </div>
+    <div class="stats-grid">
+        {% for record in stats.recent_predictions %}
+        <article class="stat-card glass-card">
+            <p class="stat-label">{{ record.timestamp }}</p>
+            <h3>{{ record.breed }}</h3>
+            <p>{{ record.category }} • {{ record.origin }}</p>
+            <p class="stat-note">{{ record.confidence }}% confidence</p>
+        </article>
+        {% else %}
+        <article class="stat-card glass-card">
+            <p class="stat-label">No recent predictions</p>
+            <h3>Ready to scan.</h3>
+            <p class="stat-note">Upload a livestock image to begin.</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Register | LivestockAI{% endblock %}
+{% block content %}
+<div class="auth-shell fade-up">
+    <div class="auth-card glass-card">
+        <div class="auth-header">
+            <h2>Create account</h2>
+            <p>Register for secure access to LivestockAI analytics and prediction history.</p>
+        </div>
+        <form action="{{ url_for('register') }}" method="post" class="auth-form">
+            <label>Username</label>
+            <input name="username" type="text" placeholder="Choose a username" required />
+            <label>Email</label>
+            <input name="email" type="email" placeholder="you@example.com" required />
+            <label>Password</label>
+            <input name="password" type="password" placeholder="Create a password" required />
+            <button type="submit" class="button primary">Create Account</button>
+        </form>
+        <p class="auth-note">Already registered? <a href="{{ url_for('login') }}">Sign in here</a></p>
+    </div>
+</div>
+{% endblock %}

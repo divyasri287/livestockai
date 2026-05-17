@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Detection Result | LivestockAI{% endblock %}
+{% block content %}
+<section class="page-header fade-up">
+    <div>
+        <span class="eyebrow">Result Insight</span>
+        <h2>Detailed breed prediction and animal intelligence.</h2>
+    </div>
+    <div class="header-actions">
+        <a href="{{ url_for('detect') }}" class="button ghost"><i class="fa-solid fa-arrow-left"></i> New Detection</a>
+    </div>
+</section>
+
+<div class="grid-two fade-up">
+    <div class="glass-card result-detail-card">
+        {% if last_prediction %}
+        <div class="result-header">
+            <div>
+                <span class="eyebrow">Breed Identified</span>
+                <h2>{{ last_prediction.breed }}</h2>
+            </div>
+            <span class="status-chip">{{ last_prediction.animal_type }}</span>
+        </div>
+        <div class="result-metrics">
+            <div>
+                <p>Confidence</p>
+                <strong>{{ last_prediction.confidence }}%</strong>
+            </div>
+            <div>
+                <p>Category</p>
+                <strong>{{ last_prediction.category }}</strong>
+            </div>
+            <div>
+                <p>Origin</p>
+                <strong>{{ last_prediction.origin }}</strong>
+            </div>
+            <div>
+                <p>Milk Production</p>
+                <strong>{{ last_prediction.milk_production }}</strong>
+            </div>
+        </div>
+        <div class="result-description">
+            <h4>Breed Intelligence</h4>
+            <p>{{ last_prediction.characteristics }}</p>
+        </div>
+        <div class="action-buttons">
+            <a href="{{ url_for('history') }}" class="button secondary">View History</a>
+            <a href="{{ url_for('dashboard') }}" class="button primary">See Analytics</a>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fa-solid fa-eye-slash"></i>
+            <h3>No result available yet.</h3>
+            <p>Run a breed detection first and then come back for the full analysis page.</p>
+        </div>
+        {% endif %}
+    </div>
+    <div class="glass-card detail-panel">
+        <div class="panel-heading">
+            <h3>Breed Origin & Insights</h3>
+            <p>Learn more about the selected cattle or buffalo breed generated from your last detection.</p>
+        </div>
+        {% if last_prediction %}
+        <div class="info-grid">
+            <div class="info-item">
+                <span>Animal type</span>
+                <strong>{{ last_prediction.animal_type }}</strong>
+            </div>
+            <div class="info-item">
+                <span>Prediction source</span>
+                <strong>{{ last_prediction.source }}</strong>
+            </div>
+            <div class="info-item">
+                <span>Detected at</span>
+                <strong>{{ last_prediction.timestamp }}</strong>
+            </div>
+            <div class="info-item">
+                <span>Breed tag</span>
+                <strong>{{ last_prediction.category }}</strong>
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p>Please perform a detection to see the breed intelligence details.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

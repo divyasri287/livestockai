@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}LivestockAI{% endblock %}</title>
+    <meta name="description" content="LivestockAI delivers smart livestock intelligence for cattle and buffalo breed recognition with a premium AI dashboard and analytics." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-pVnOe2Gd65/K2v7Ijz3n06ZRM4P7SM/0k4SzvEDCERP94a2u7B1uGzdxmmOhAplWE1k7/j36T1V5Ww5vru2njQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body data-page="{{ page }}">
+    <div class="app-frame">
+        {% if page not in ['login', 'register'] %}
+        <aside class="app-sidebar">
+            <div class="sidebar-menu">
+                <div class="sidebar-logo">
+                    <div class="brand-mark">LA</div>
+                    <div>
+                        <h1>LivestockAI</h1>
+                        <p>Smart Livestock Intelligence</p>
+                    </div>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="{{ url_for('home') }}" class="nav-link {% if page == 'home' %}active{% endif %}"><i class="fa-solid fa-house"></i>Home</a>
+                    <a href="{{ url_for('detect') }}" class="nav-link {% if page == 'detect' %}active{% endif %}"><i class="fa-solid fa-bullseye"></i>Breed Detection</a>
+                    <a href="{{ url_for('result_page') }}" class="nav-link {% if page == 'result' %}active{% endif %}"><i class="fa-solid fa-chart-pie"></i>Detection Result</a>
+                    <a href="{{ url_for('camera') }}" class="nav-link {% if page == 'camera' %}active{% endif %}"><i class="fa-solid fa-video"></i>Live Camera</a>
+                    <a href="{{ url_for('history') }}" class="nav-link {% if page == 'history' %}active{% endif %}"><i class="fa-solid fa-clock-rotate-left"></i>History</a>
+                    <a href="{{ url_for('dashboard') }}" class="nav-link {% if page == 'dashboard' %}active{% endif %}"><i class="fa-solid fa-chart-line"></i>Dashboard</a>
+                    <a href="{{ url_for('admin') }}" class="nav-link {% if page == 'admin' %}active{% endif %}"><i class="fa-solid fa-user-gear"></i>Admin Panel</a>
+                    <a href="{{ url_for('about') }}" class="nav-link {% if page == 'about' %}active{% endif %}"><i class="fa-solid fa-circle-info"></i>About</a>
+                </nav>
+            </div>
+            <div class="sidebar-footer">
+                {% if user %}
+                <p>Signed in as <strong>{{ user }}</strong></p>
+                <a href="{{ url_for('logout') }}" class="button ghost">Logout</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="button ghost">Sign In</a>
+                {% endif %}
+            </div>
+        </aside>
+        {% endif %}
+
+        <div class="app-main {% if page in ['login', 'register'] %}single-page{% endif %}">
+            {% if page not in ['login', 'register'] %}
+            <header class="topbar">
+                <div class="topbar-left">
+                    <div>
+                        <p class="eyebrow">Premium AI Livestock Platform</p>
+                        <h2>Livestock breed intelligence for modern agriculture</h2>
+                    </div>
+                </div>
+                <div class="topbar-actions">
+                    {% if user %}
+                    <div class="user-pill"><i class="fa-solid fa-user-check"></i>{{ user }}</div>
+                    {% endif %}
+                    <a href="{{ url_for('home') }}" class="button secondary"><i class="fa-solid fa-house"></i> Overview</a>
+                </div>
+            </header>
+            {% endif %}
+
+            <main class="page-content">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <div class="alert-bar">
+                        {% for message in messages %}
+                            <div class="alert-card">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                {% block content %}{% endblock %}
+            </main>
+
+            {% if page not in ['login', 'register'] %}
+            <footer class="site-footer">
+                <p>LivestockAI © 2026 · Modern Livestock Analytics Platform</p>
+                <div class="footer-links">
+                    <a href="{{ url_for('about') }}">About</a>
+                    <a href="{{ url_for('history') }}">History</a>
+                    <a href="{{ url_for('dashboard') }}">Analytics</a>
+                </div>
+            </footer>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Admin Panel | LivestockAI{% endblock %}
+{% block content %}
+<section class="page-header fade-up">
+    <div>
+        <span class="eyebrow">Admin Panel</span>
+        <h2>Manage the platform and monitor active user activity.</h2>
+    </div>
+    <div class="header-actions">
+        <form action="{{ url_for('clear_history') }}" method="post">
+            <button type="submit" class="button ghost"><i class="fa-solid fa-trash"></i> Clear History</button>
+        </form>
+    </div>
+</section>
+
+<div class="grid-two fade-up">
+    <div class="glass-card admin-card">
+        <h3>Platform Overview</h3>
+        <div class="info-grid">
+            <div>
+                <span>Total Predictions</span>
+                <strong>{{ stats.total_predictions }}</strong>
+            </div>
+            <div>
+                <span>Registered Users</span>
+                <strong>{{ users|length }}</strong>
+            </div>
+            <div>
+                <span>Average Confidence</span>
+                <strong>{{ stats.average_confidence }}</strong>
+            </div>
+            <div>
+                <span>Unique Breeds</span>
+                <strong>{{ stats.breed_count }}</strong>
+            </div>
+        </div>
+    </div>
+    <div class="glass-card admin-card">
+        <h3>Latest Users</h3>
+        <ul class="user-list">
+            {% for user in users[-5:]|reverse %}
+            <li><i class="fa-solid fa-user"></i>{{ user.username }}</li>
+            {% else %}
+            <li>No registered users yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="glass-card history-card fade-up">
+    <h3>Recent Predictions</h3>
+    <div class="table-wrap admin-table">
+        <table>
+            <thead>
+                <tr><th>Time</th><th>Breed</th><th>Confidence</th><th>Source</th></tr>
+            </thead>
+            <tbody>
+                {% for record in stats.recent_predictions %}
+                <tr>
+                    <td>{{ record.timestamp }}</td>
+                    <td>{{ record.breed }}</td>
+                    <td>{{ record.confidence }}%</td>
+                    <td>{{ record.source }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="4">No recent predictions recorded.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

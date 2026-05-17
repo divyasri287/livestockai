@@ -1,0 +1,38 @@
+[
+  {
+    "id": "a8f520c1f60e44ee9cb529cec5aa99be",
+    "timestamp": "2026-05-17 07:41:55",
+    "breed": "Sahiwal",
+    "confidence": 45.8,
+    "category": "Dairy",
+    "origin": "Punjab, India",
+    "characteristics": "Good milk yield, disease resistant, adaptive.",
+    "milk_production": "High",
+    "animal_type": "Cattle",
+    "source": "Upload"
+  },
+  {
+    "id": "f13bddc15703459a87d0069b0f0dc29e",
+    "timestamp": "2026-05-17 04:50:00",
+    "breed": "Ongole",
+    "confidence": 35.0,
+    "category": "Dual-purpose",
+    "origin": "Andhra Pradesh, India",
+    "characteristics": "Robust frame, drought resistance, versatile.",
+    "milk_production": "Moderate",
+    "animal_type": "Cattle",
+    "source": "Camera"
+  },
+  {
+    "id": "1f82b383bcbd4015ba4b72fe4b3fb5b9",
+    "timestamp": "2026-05-17 04:46:07",
+    "breed": "Sahiwal",
+    "confidence": 29.3,
+    "category": "Dairy",
+    "origin": "Punjab, India",
+    "characteristics": "Good milk yield, disease resistant, adaptive.",
+    "milk_production": "High",
+    "animal_type": "Cattle",
+    "source": "Upload"
+  }
+]
